@@ -14,10 +14,6 @@ function formatPrice(value) {
 }
 
 // Seleção dinâmica do número do WhatsApp conforme dia/horário
-// Regra:
-// Sábado: 09:00 <= h < 14:00 -> 5584996775340, caso contrário -> 5584996775282
-// Domingo: sempre -> 5584996775282
-// Segunda-Sexta: 09:00 <= h < 18:00 -> 5584996775340, caso contrário -> 5584996775282
 function getWhatsappNumber(date = new Date()) {
   const day = date.getDay();
   const totalMinutes = date.getHours() * 60 + date.getMinutes();
@@ -47,6 +43,17 @@ function openWhatsapp(message) {
   const whatsappUrl = `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
   window.open(whatsappUrl, '_blank');
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  const whatsappButton = document.getElementById('whatsapp-header-btn');
+
+  if (whatsappButton) {
+    whatsappButton.addEventListener('click', (event) => {
+      event.preventDefault();
+      openWhatsapp('Olá, vim pelo site. Queria falar com o atendimento ao cliente.');
+    });
+  }
+});
 
 function firstNonEmpty(...values) {
   for (const value of values) {
@@ -247,7 +254,8 @@ function normalizeProducts(data) {
       );
 
       const hasBlockedKeyword = /(display|bateria)/i.test(String(product.aparelhoDescricao || ''));
-      console.log(product)
+      //console.log(product)
+      
       return {
         id: firstNonEmpty(product.id, product.codigo, product.sku, product.idProduto),
         name: resolvedName || 'Sem nome',
