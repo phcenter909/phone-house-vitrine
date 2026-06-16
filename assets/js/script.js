@@ -22,8 +22,9 @@ function getWhatsappNumber(date = new Date()) {
   const END_WEEKDAY = 18 * 60;     // 18:00
   const END_SATURDAY = 14 * 60;    // 14:00
 
-  const MAIN_NUMBER = '5584996775340';
-  const SUPPORT_NUMBER = '5584996775282';
+  const MAIN_NUMBER = '5584999284842';
+  
+  const SUPPORT_NUMBER = '5584998035100';
 
   // 1. Domingo: sempre suporte
   if (day === 0) return SUPPORT_NUMBER;
