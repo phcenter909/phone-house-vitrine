@@ -287,21 +287,39 @@ function normalizeProducts(data) {
   return uniqueProducts.sort((a, b) => a.name.localeCompare(b.name, 'pt-BR'));
 }
 
+function setSafeHTML(element, htmlString) {
+  if (window.trustedTypes && window.trustedTypes.createPolicy) {
+    let policy = window.trustedTypes.defaultPolicy;
+    if (!policy) {
+      try {
+        policy = window.trustedTypes.createPolicy('default', {
+          createHTML: (string) => string
+        });
+      } catch (e) {
+        console.warn('TrustedTypes policy creation failed:', e);
+      }
+    }
+    element.innerHTML = policy ? policy.createHTML(htmlString) : htmlString;
+  } else {
+    element.innerHTML = htmlString;
+  }
+}
+
 function renderProducts(products) {
   const grid = document.getElementById('products-grid');
 
   if (!grid) return;
 
   if (!products.length) {
-    grid.innerHTML = `
+    setSafeHTML(grid, `
       <div class="col-12 text-center py-5">
         <h5 class="text-muted">Nenhum produto encontrado.</h5>
       </div>
-    `;
+    `);
     return;
   }
 
-  grid.innerHTML = products.map(product => `
+  const cardsHtml = products.map(product => `
     <div class="col-12 col-md-6 col-lg-4">
       <div class="card product-card shadow-sm h-100">
         <img src="${product.image}" class="product-image object-fit-contain" alt="${product.name}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=80';">
@@ -310,9 +328,12 @@ function renderProducts(products) {
             <h5 class="card-title mb-0">${product.name}</h5>
           </div>
           <div class="product-meta mb-3">
-            <div>Armazenamento: ${product.state}</div>
-            <div>Armazenamento: ${product.storage}</div>
-            <div>IMEI: ${product.imei || 'Não informado'}</div>
+            <div><strong>Estado:</strong> ${product.state}</div>
+            <div><strong>Armazenamento:</strong> ${product.storage}</div>
+            <div><strong>IMEI:</strong> ${product.imei || 'Não informado'}</div>
+          </div>
+          <div class="price mb-3">
+            ${product.price > 0 ? formatPrice(product.price) : '<span class="text-muted small">Sob consulta</span>'}
           </div>
           <div class="mt-auto">
               <button class="btn btn-buy w-100" data-product-name="${product.name}" data-product-state="${product.state}" data-product-imei="${product.imei || ''}">
@@ -323,6 +344,8 @@ function renderProducts(products) {
       </div>
     </div>
   `).join('');
+
+  setSafeHTML(grid, cardsHtml);
 
   document.querySelectorAll('.btn-buy').forEach((button) => {
     button.addEventListener('click', () => {
@@ -340,7 +363,7 @@ function populateFilters(products) {
   if (!filter) return;
 
   const states = [...new Set(products.map(product => product.state))].sort();
-  filter.innerHTML = '<option value="">Estado aparelho</option>';
+  setSafeHTML(filter, '<option value="">Estado aparelho</option>');
 
   states.forEach(state => {
     const option = document.createElement('option');
@@ -411,11 +434,11 @@ async function init() {
     console.error('Erro ao carregar os produtos.', error);
     const grid = document.getElementById('products-grid');
     if (grid) {
-      grid.innerHTML = `
+      setSafeHTML(grid, `
         <div class="col-12 text-center py-5 text-danger">
           Erro ao carregar os produtos. Verifique se a planilha está pública.
         </div>
-      `;
+      `);
     }
   }
 }

@@ -1,154 +1,211 @@
 /* Paleta de Cores Phone House */
 :root {
-    --primary: #F2F2F2;
+    --primary: #F8F9FA;
     --dark-navy: #022873;
     --light-navy: #0433BF;
     --gray-blue: #8A91A6;
+    --whatsapp-green: #25d366;
 }
 
+/* Geral */
+body {
+    background-color: var(--primary);
+    color: var(--dark-navy);
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
 
-/* Logo Header */
+/* Header */
+header {
+    background: linear-gradient(135deg, #011640 0%, #022873 100%) !important;
+    color: #ffffff;
+    border-bottom: 4px solid var(--light-navy);
+}
+
 .logo-header {
-    height: 200px;
+    height: 120px;
     width: auto;
     object-fit: contain;
     display: block;
     margin-left: auto;
     margin-right: auto;
+    border: 3px solid rgba(255, 255, 255, 0.15);
+    padding: 4px;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background-color: #ffffff;
 }
 
-/* Estilos personalizados para Phone House */
-body {
-    background-color: var(--primary);
-    color: var(--dark-navy);
+.logo-header:hover {
+    transform: scale(1.08) rotate(2deg);
+    border-color: rgba(255, 255, 255, 0.4);
 }
 
-header {
-    background-color: var(--dark-navy) !important;
-    color: var(--primary);
-    border-bottom: 3px solid var(--light-navy);
+header h1 {
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-top: 1rem;
 }
 
-header h1, header p {
-    color: var(--primary);
+header p {
+    font-size: 0.95rem;
 }
 
+/* Header Buttons */
+header .btn-outline-primary,
+header .btn-outline-success {
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.08);
+    font-weight: 500;
+    padding: 0.5rem 1.25rem;
+    border-radius: 30px;
+    transition: all 0.25s ease;
+}
+
+header .btn-outline-primary:hover {
+    background-color: #ffffff;
+    color: var(--dark-navy) !important;
+    border-color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+}
+
+header .btn-outline-success:hover {
+    background-color: var(--whatsapp-green);
+    color: #ffffff !important;
+    border-color: var(--whatsapp-green);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+}
+
+/* Grid & Cards de Produtos */
 .product-card {
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     height: 100%;
-    border: 1px solid var(--gray-blue);
-    background-color: var(--primary);
+    border: 1px solid rgba(138, 145, 166, 0.18);
+    background-color: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
 }
 
 .product-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 25px rgba(7, 28, 89, 0.15) !important;
-    border-color: var(--dark-navy);
+    transform: translateY(-6px);
+    box-shadow: 0 15px 30px rgba(2, 40, 115, 0.1) !important;
+    border-color: rgba(4, 51, 191, 0.4);
 }
 
 .product-image {
-    height: 113px;
-    object-fit: cover;
-    border-bottom: 1px solid var(--gray-blue);
+    height: 200px;
+    object-fit: contain;
+    padding: 1.5rem;
+    background-color: #ffffff;
+    border-bottom: 1px solid rgba(138, 145, 166, 0.1);
+    transition: transform 0.3s ease;
 }
 
-.price {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--dark-navy);
-}
-
-.product-meta {
-    border-top: 1px solid var(--gray-blue);
-    border-bottom: 1px solid var(--gray-blue);
-    padding: 0.5rem 0;
-    font-size: 0.75rem;
-    color: var(--gray-blue);
-}
-
-.btn-buy {
-    background-color: var(--dark-navy);
-    color: var(--primary);
-    font-weight: 500;
-    border: 1px solid var(--dark-navy);
-}
-
-.btn-buy:hover {
-    background-color: var(--light-navy);
-    color: var(--primary);
-    border-color: var(--light-navy);
-}
-
-.btn-success {
-    background-color: var(--dark-navy) !important;
-    border-color: var(--dark-navy) !important;
-    color: var(--primary);
-}
-
-.btn-success:hover {
-    background-color: var(--light-navy) !important;
-    border-color: var(--light-navy) !important;
-}
-
-.btn-outline-success {
-    color: var(--dark-navy);
-    border-color: var(--dark-navy);
-}
-
-.btn-outline-success:hover {
-    background-color: var(--dark-navy);
-    color: var(--primary);
-    border-color: var(--dark-navy);
-}
-
-/* Inputs e Selects */
-.form-control,
-.form-select {
-    background-color: var(--primary);
-    color: var(--dark-navy);
-    border-color: var(--gray-blue);
-}
-
-.form-control:focus,
-.form-select:focus {
-    background-color: var(--primary);
-    color: var(--dark-navy);
-    border-color: var(--dark-navy);
-    box-shadow: 0 0 0 0.25rem rgba(7, 28, 89, 0.15);
-}
-
-.form-control::placeholder {
-    color: var(--gray-blue);
-}
-
-/* Footers e Cards */
-footer {
-    background-color: var(--primary) !important;
-    border-top: 2px solid var(--dark-navy);
-    color: var(--dark-navy);
-}
-
-.card {
-    background-color: var(--primary);
-    border-color: var(--gray-blue);
-    color: var(--dark-navy);
+.product-card:hover .product-image {
+    transform: scale(1.05);
 }
 
 .card-title {
     color: var(--dark-navy);
     font-weight: 600;
+    font-size: 1.15rem;
+    line-height: 1.3;
 }
 
-/* Texto e Cores */
-.text-muted {
-    color: var(--gray-blue) !important;
+.product-meta {
+    border-top: 1px solid rgba(138, 145, 166, 0.12);
+    border-bottom: 1px solid rgba(138, 145, 166, 0.12);
+    padding: 0.75rem 0;
+    font-size: 0.8rem;
+    color: #555e72;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
 }
 
-.text-dark {
-    color: var(--dark-navy) !important;
+.product-meta strong {
+    color: var(--dark-navy);
 }
 
-/* Remove Dark Theme Styles */
+.price {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--light-navy);
+    letter-spacing: -0.5px;
+}
+
+.btn-buy {
+    background-color: var(--dark-navy);
+    color: #ffffff;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    padding: 0.7rem;
+    transition: all 0.2s ease;
+}
+
+.btn-buy:hover {
+    background-color: var(--light-navy);
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(4, 51, 191, 0.25);
+}
+
+/* Filtros */
+.form-control,
+.form-select {
+    background-color: #ffffff;
+    color: var(--dark-navy);
+    border: 1.5px solid rgba(138, 145, 166, 0.25);
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+    background-color: #ffffff;
+    color: var(--dark-navy);
+    border-color: var(--light-navy);
+    box-shadow: 0 0 0 4px rgba(4, 51, 191, 0.12);
+}
+
+.form-control::placeholder {
+    color: var(--gray-blue);
+    opacity: 0.8;
+}
+
+/* Botão Xiaomi */
+.btn-outline-success.btn-lg {
+    border: 2px solid var(--whatsapp-green);
+    color: var(--whatsapp-green);
+    background-color: transparent;
+    font-weight: 600;
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    transition: all 0.2s ease;
+}
+
+.btn-outline-success.btn-lg:hover {
+    background-color: var(--whatsapp-green);
+    color: #ffffff;
+    border-color: var(--whatsapp-green);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.25);
+}
+
+/* Footer */
+footer {
+    background-color: #ffffff !important;
+    border-top: 1px solid rgba(138, 145, 166, 0.15);
+    color: var(--gray-blue);
+    padding: 2rem 0;
+}
+
+/* Remove Dark Theme Fallback */
 body.dark-theme {
     background-color: var(--primary);
     color: var(--dark-navy);
